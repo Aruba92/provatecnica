@@ -4,38 +4,39 @@
     align-items: center;
     justify-content: center;
     width: 50%;
-    height: 80vh;
+    min-width: 705px;
+    height: 100vh;
     margin: 0 auto 0 auto;
-    /* background-color: aqua; */
 }
 
-.title{
+.viewButtons{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 50px;
 }
 
-.title button{
-    width: 40px;
+.viewButtons button{
+    width: 100px;
     height: 40px;
     margin: 10px;
-    background-color: rgb(163, 163, 163);
+    background-color: rgb(233, 233, 233);
+    color: rgb(17, 77, 206);
 }
 
-.listViewButton{
-
-}
-.gridViewButton{
-
+.viewButtons .active{
+    background-color: rgb(17, 77, 206);
+    color: rgb(233, 233, 233);
 }
 
-.pokemons{
+.pokemonsBox{
     display: flex;
     flex-direction: column;
     align-items: center;
-    flex-wrap: wrap;
     width: 80%;
-    height: 80%;
-    /*background-color: antiquewhite;*/
+    height: 480px;
+    margin: 50px;
+}
+
+.pokemonsBoxGrid{
+    flex-wrap: wrap;
 }

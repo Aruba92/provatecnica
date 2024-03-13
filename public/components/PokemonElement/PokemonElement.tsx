@@ -10,9 +10,7 @@ export default function PokemonElement ( {pokemonList}:Props ) :JSX.Element {
     return(
         <>
             {pokemonList.map((element:any, index:number) => (
-                <div key={index} className={styles.pokemonElement}>
-                    <p>{element.name}</p>
-                </div>
+                <p key={index} className={styles.pokemonElement}>{element.name}</p>
             ))}
         </>
     );

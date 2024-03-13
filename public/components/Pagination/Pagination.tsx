@@ -10,8 +10,8 @@ interface Props{
 
 export default function Pagination ({elementsPerPage, dataLength, handlePagination, currentPage}:Props) : JSX.Element {
   const paginationNumbers = [];
-
-  for (let i = 1; i <= Math.ceil(dataLength / elementsPerPage); i++) {
+  const paginationsCount = Math.ceil(dataLength / elementsPerPage);
+  for (let i = 1; i <= paginationsCount; i++) {
     paginationNumbers.push(i);
   }
 

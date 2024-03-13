@@ -1,7 +1,15 @@
 .pokemonElement{
     width: 110px;
+    padding: 10px;
+    margin: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+.pokemonElement:hover{
+    background-color: rgb(219, 219, 219);
+    filter: brightness(90%);
 }
 
-.pokemonElement p::first-letter{
+.pokemonElement:first-letter{
     text-transform: uppercase;
 }
