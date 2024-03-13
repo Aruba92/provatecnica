@@ -1,0 +1,7 @@
+.pokemonElement{
+    width: 110px;
+}
+
+.pokemonElement p::first-letter{
+    text-transform: uppercase;
+}
