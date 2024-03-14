@@ -11,21 +11,34 @@ export default function Home() {
   /*Fetch Data*/
   const [data, setData] = useState<Pokemon[]>([]);
   /*ViewType*/
-  const [viewType, setViewType] = useState<string>("list");
-  const elementsPerPageList:number = 10;
-  const elementsPerPageGrid:number = 40;
+  let viewTypeValue = "list";
+  if (window.localStorage.getItem("viewType")){
+    viewTypeValue = window.localStorage.getItem("viewType")!;
+  }
+  const [viewType, setViewType] = useState<string>(viewTypeValue);
   /*Pagination*/
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [elementsPerPage, setElementsPerPage] = useState<number>(elementsPerPageList);
-  //const [dataLength, setDataLength] = useState<number>(0);
+  let currentPageValue = 1;
+  if (window.localStorage.getItem("currentPage")){
+    currentPageValue = parseInt(window.localStorage.getItem("currentPage")!);
+  }
+  const [currentPage, setCurrentPage] = useState<number>(currentPageValue);
+  /* const [elementsPerPage, setElementsPerPage] = useState<number>(10); */
+  const elementsPerPage:number = 40;
   
   
   useEffect(() => {
-    fetch('https://pokeapi.co/api/v2/pokemon?limit=80')
+    fetch('https://pokeapi.co/api/v2/pokemon?limit=160')
       .then(response => response.json())
       .then(json => setData(json.results))
       .catch(error => console.error(error));
   }, [])
+
+  useEffect(()=>{
+    window.localStorage.setItem("currentPage", currentPage.toString());
+  },[currentPage])
+  useEffect(()=>{
+    window.localStorage.setItem("viewType", viewType);
+  },[viewType])
   
   function handlePagination (pageNumber:number) {
     setCurrentPage(pageNumber);
@@ -34,11 +47,9 @@ export default function Home() {
   function setView(type:string){
     if (type==="list") {
       setViewType("list");
-      setElementsPerPage(elementsPerPageList);
       setCurrentPage(1);
     }else{
       setViewType("grid");
-      setElementsPerPage(elementsPerPageGrid);
       setCurrentPage(1);
     }
   }
@@ -51,7 +62,7 @@ export default function Home() {
         <button className={viewType==="grid" ? styles.active:""} onClick={()=>setView("grid")}>Grid</button>
       </div>
 
-      <div className={`${styles.pokemonsBox} ${viewType==="list" ? styles.pokemonsBoxList : styles.pokemonsBoxGrid}`}>
+      <div className={viewType==="list" ? styles.pokemonsBoxList : styles.pokemonsBoxGrid}>
         <PokemonElement pokemonList={data.slice((currentPage-1)*elementsPerPage, currentPage*elementsPerPage)}></PokemonElement>
       </div>
 
