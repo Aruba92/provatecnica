@@ -12,3 +12,8 @@ button:hover{
     background-color: rgb(219, 219, 219);
     filter: brightness(90%);
 }
+
+a{
+    text-decoration: none;
+    color: black;
+}

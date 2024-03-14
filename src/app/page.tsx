@@ -1,17 +1,15 @@
 'use client';
 
-import Image from "next/image";
 import React, { useState, useEffect } from 'react';
 import styles from "./page.module.css";
 import Pagination from "../../public/components/Pagination/Pagination";
-import PokemonElement from "../../public/components/PokemonElement/PokemonElement";
+import PokemonElement from "../../public/components/PokemonElement/pokemonElement";
 import Pokemon from "../../public/types/Pokemon";
 
 export default function Home() {
 
   /*Fetch Data*/
   const [data, setData] = useState<Pokemon[]>([]);
-  const urlLimit:string = 'https://pokeapi.co/api/v2/pokemon?limit=80';
   /*ViewType*/
   const [viewType, setViewType] = useState<string>("list");
   const elementsPerPageList:number = 10;
@@ -23,7 +21,7 @@ export default function Home() {
   
   
   useEffect(() => {
-    fetch(urlLimit)
+    fetch('https://pokeapi.co/api/v2/pokemon?limit=80')
       .then(response => response.json())
       .then(json => setData(json.results))
       .catch(error => console.error(error));
