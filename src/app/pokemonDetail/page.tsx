@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useRouter, useSearchParams } from 'next/navigation';
 import styles from "./pokemonDetail.module.css";
 import Pokemon from "../../../public/types/Pokemon";
+import {APIPokemonService} from "../../utils/API";
 
 export default function Page () :JSX.Element{
     const [data, setData] = useState<Pokemon>();
@@ -12,11 +13,13 @@ export default function Page () :JSX.Element{
     const searchParams = useSearchParams();
     const pokemonName = searchParams.get("pokemonName");
 
+    const ApiService = new APIPokemonService();
     useEffect(() => {
-        fetch('https://pokeapi.co/api/v2/pokemon/' + pokemonName)
+        ApiService.APIcallPokemon(setData, "/" + pokemonName);
+        /* fetch('https://pokeapi.co/api/v2/pokemon/' + pokemonName)
             .then(response => response.json())
             .then(json => setData(json.forms[0]))
-            .catch(error => console.error(error));
+            .catch(error => console.error(error)); */
         }, [])
 
     const router = useRouter();

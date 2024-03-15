@@ -3,8 +3,9 @@
 import React, { useState, useEffect } from 'react';
 import styles from "./page.module.css";
 import Pagination from "../../public/components/Pagination/Pagination";
-import PokemonElement from "../../public/components/PokemonElement/pokemonElement";
+import PokemonElement from "../../public/components/PokemonElement/PokemonElement";
 import Pokemon from "../../public/types/Pokemon";
+import {APIPokemonService} from "../utils/API";
 
 export default function Home() {
 
@@ -25,12 +26,9 @@ export default function Home() {
   /* const [elementsPerPage, setElementsPerPage] = useState<number>(10); */
   const elementsPerPage:number = 40;
   
-  
+  const ApiService = new APIPokemonService();
   useEffect(() => {
-    fetch('https://pokeapi.co/api/v2/pokemon?limit=160')
-      .then(response => response.json())
-      .then(json => setData(json.results))
-      .catch(error => console.error(error));
+    ApiService.APIcallLimit(setData, "?limit=160");
   }, [])
 
   useEffect(()=>{
